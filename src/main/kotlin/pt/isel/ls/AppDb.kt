@@ -6,8 +6,8 @@ fun main(){
 
     val dataSource = PGSimpleDataSource()
     val jdbcDatabaseURL = System.getenv("JDBC_DATABASE_URL")
-    dataSource.setURL(jdbcDatabaseURL)
-    //dataSource.setURL("jdbc:postgresql://localhost/postgres?user=postgres&password=postgres")
+    //dataSource.setURL(jdbcDatabaseURL)
+    dataSource.setURL("jdbc:postgresql://localhost/postgres?user=postgres&password=postgres")
 
     dataSource.getConnection().use {
         val stm = it.prepareStatement("select * from students")
