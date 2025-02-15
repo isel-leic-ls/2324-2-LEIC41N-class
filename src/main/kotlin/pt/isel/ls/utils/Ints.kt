@@ -22,10 +22,10 @@ fun max(a: Int, b: Int): Int =
 fun indexOfBinary(a: IntArray, fromIndex: Int, toIndex: Int, n: Int): Int {
     require(fromIndex <= toIndex) { "from($fromIndex) > to($toIndex)" }
     var low = fromIndex
-    var high = toIndex - 1
+    var high = toIndex-1;
     var mid: Int
-    while (low < high) {
-        mid = high + low / 2 + 1
+    while (low <= high) {
+        mid = (high + low) / 2
         when {
             n > a[mid] -> low = mid + 1
             n < a[mid] -> high = mid - 1
