@@ -35,6 +35,7 @@ fun main(){
         val rs = stm.execute();
     }
 
+    // SELECT SNIPPET
     dataSource.getConnection().use {
         val stm = it.prepareStatement("select * from students")
         val rs = stm.executeQuery()
@@ -42,4 +43,6 @@ fun main(){
             println(rs.getString("name"))
         }
     }
+
+
 }
