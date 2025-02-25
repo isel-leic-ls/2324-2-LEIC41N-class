@@ -15,10 +15,13 @@ class ExampleTest {
     fun testDatabase() {
          val db: AppDb = AppDb();
 
+
+        assertTrue { db.doInsert(1, 2201, "Aluno 2201") }
+        assertTrue { db.doInsert(1, 2202, "Aluno 2202") }
+
+        // limpar os dados de test
         assertTrue { db.doDelete(2201) }
         assertTrue { db.doDelete(2202) }
-        assertTrue { db.doInsert(1, 2201, "Faustino 2201") }
-        assertTrue { db.doInsert(1, 2202, "Faustino 2202") }
 
     }
 
