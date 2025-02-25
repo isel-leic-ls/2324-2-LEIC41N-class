@@ -20,8 +20,8 @@ class ExampleTest {
         assertTrue { db.doInsert(1, 2202, "Aluno 2202") }
 
         // limpar os dados de test
-        //assertTrue { db.doDelete(2201) }
-        //assertTrue { db.doDelete(2202) }
+        assertTrue { db.doDelete(2201) }
+        assertTrue { db.doDelete(2202) }
 
     }
 
