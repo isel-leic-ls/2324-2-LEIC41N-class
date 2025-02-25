@@ -5,23 +5,23 @@ import java.sql.Connection
 import java.sql.SQLException
 
 
-public class AppDb {
-    val dataSource = PGSimpleDataSource()
-    var jdbcDatabaseURL = System.getenv("JDBC_DATABASE_URL")
+class AppDb {
+    private val dataSource = PGSimpleDataSource()
+    private var jdbcDatabaseURL = System.getenv("JDBC_DATABASE_URL")
 
     //dataSource.setURL(jdbcDatabaseURL)
     private lateinit var connection: Connection
 
+
     // INIT
     init {
-        // test only
+        // hard code just to test only
         jdbcDatabaseURL = "jdbc:postgresql://localhost/postgres?user=postgres&password=postgres"
         dataSource.setURL(jdbcDatabaseURL)
     }
 
     // OPEN
-    fun openConnection(): Boolean {
-        println("Connection")
+    private fun openConnection(): Boolean {
         try {
             connection = dataSource.connection
         } catch (e: SQLException) {
@@ -32,7 +32,7 @@ public class AppDb {
     }
 
     //CLOSE
-    fun closeConnection() {
+    private fun closeConnection() {
         if (connection.isValid(0) && !connection.isClosed) {
             try {
                 connection.close()
@@ -62,7 +62,7 @@ public class AppDb {
         return !error
     }
 
-
+    // INSERT
     fun doInsert(course:Int, number:Int, name:String): Boolean {
         var error = false
 
@@ -88,36 +88,21 @@ public class AppDb {
 }
 
 
-    fun main() {
+fun main() {
 
 
-        // INSERT SNIPPET
-        /*
-        dataSource.connection.use {
-            val stm = connection.prepareStatement("insert into students(course, number, name) values (?, ?, ?);")
-            stm.setInt(1, 1)
-            stm.setInt(2, 2200)
-            stm.setString(3, "Faustino")
+    val dataSource = PGSimpleDataSource()
+    val jdbcDatabaseURL = System.getenv("JDBC_DATABASE_URL")
+    //dataSource.setURL(jdbcDatabaseURL)
+    dataSource.setURL("jdbc:postgresql://localhost/postgres?user=postgres&password=postgres")
 
-            val rs = stm.execute()
+    dataSource.getConnection().use {
+        val stm = it.prepareStatement("select * from students")
+        val rs = stm.executeQuery()
+        while (rs.next()) {
+            println(rs.getString("name"))
         }
-        // UPDATE SNIPPET
-        dataSource.connection.use {
-            val stm = connection.prepareStatement("update students set number=? where name =?")
-            stm.setInt(1, 2201)
-            stm.setString(2, "Faustino")
-
-            val rs = stm.execute()
-        }
-
-        // SELECT SNIPPET
-        dataSource.connection.use {
-            val stm = connection.prepareStatement("select * from students")
-            val rs = stm.executeQuery()
-            while (rs.next()) {
-                println(rs.getString("name"))
-            }
-        }
-*/
-
     }
+
+
+}
