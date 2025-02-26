@@ -1,2 +1,1 @@
-# FSTN
-D2201, Faustino
+# Repo para uso em Sala
